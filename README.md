@@ -52,9 +52,6 @@
 
 ## About The Project 📍
 
-<img align="center" src="assets/features.gif" alt="Logo" width="100%">
-
-\
 A Node application to count how many people have visited without server. It is just a simple application for those who want to start learning NodeJs and others JS Enviroments.
 
 <br />
@@ -98,7 +95,7 @@ You need to install NODEJS, a JavaScript run time enivroment outside the browser
   npm i
   ```
   
-    ```sh
+   ```sh
   npm start
   ```
   
