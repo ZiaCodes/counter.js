@@ -92,10 +92,6 @@ You need to install NODEJS, a JavaScript run time enivroment outside the browser
   npm i
   ```
   
-  ```sh
-  npm i
-  ```
-  
    ```sh
   npm start
   ```
