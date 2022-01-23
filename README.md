@@ -13,7 +13,7 @@
 </div>
 <br />
 <p align="center">Participating in</p>
-<div align="center"><a href="https://jwoc.tech/"><img src="https://d33wubrfki0l68.cloudfront.net/710cb0d537d2e7fa6246445c0977ecc994f05f5a/6a3b4/assets/img/jwoc_logo.svg" alt="Banner" width="60%"/></a></div>
+<div align="center"><a href="https://jwoc.tech/"><img src="https://d33wubrfki0l68.cloudfront.net/710cb0d537d2e7fa6246445c0977ecc994f05f5a/6a3b4/assets/img/jwoc_logo.svg" alt="Banner" width="40%"/></a></div>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -59,6 +59,7 @@ A Node application to count how many people have visited without server. It is j
 ## Built With ⛏️
 
 - [NODEJS](https://nodejs.dev/learn)
+- [ExpressJS](https://expressjs.com/)
 
 
 And so much love ❤️
@@ -76,7 +77,7 @@ You should know the basics of HTML5, CSS3 and Javascript.
 
 - From git CLI
   ```sh
-  git clone https://github.com/gdscjgec/Image-Editor.git
+  git clone https://github.com/ZiaCodes/counter.js.git
   ```
 
 ### Installation ⚙️
