@@ -73,7 +73,7 @@ To get started just fork the repository and make a clone .
 
 ### Prerequisites
 
-You should know the basics of HTML5, CSS3 and Javascript.
+You should know the basics of Nodejs and ReactJs.
 
 - From git CLI
   ```sh
