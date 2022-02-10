@@ -1,16 +1,34 @@
 const { readFileSync, writeFileSync } = require('fs');
 const express = require('express');
 const app = express();
+const { createHash } = require('crypto');
 
-app.get('/',(req,res) => {
-    const count = readFileSync('./count.txt','utf-8');
-    console.log('count ',count);
+const salt = "H6rT-V?pKE5=*8mp";
 
-    const newCount = parseInt(count) + 1
-    writeFileSync('./count.txt', parseInt(newCount, 10).toString());
+function get_hash(data) {
+    return createHash('sha256').update(data + salt).digest('hex');
+}
+
+app.get('/', (req, res) => {
+    var [count, hash] = readFileSync('./count.txt', 'utf-8').split(':');
+    const tempHash = get_hash(count);
+
+    if (tempHash === hash) {
+        const newCount = parseInt(count) + 1;
+        const newHash = get_hash(newCount);
+
+        const data = newCount.toString() + ':' + newHash;
+
+        writeFileSync('./count.txt', data);
+
+    } else {
+        count = "ERROR!";
+    }
+
+    console.log('count ', count);
 
     res.send(
-`<!DOCTYPE html>
+        `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,6 +44,6 @@ app.get('/',(req,res) => {
     )
 });
 
-app.listen(5000,()=>{
+app.listen(5000, () => {
     console.log(`Server is running at http://localhost:5000`)
 })
