@@ -65,6 +65,6 @@ app.get('/', (req, res) => {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.listen(5000, () => {
-    console.log(`Server is running at http://localhost:5000`)
+app.listen(5555, () => {
+    console.log(`Server is running at http://localhost:5555`)
 })
