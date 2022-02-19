@@ -1,5 +1,5 @@
 const { readFileSync, writeFileSync } = require('fs');
-const { createHash } = require('crypto');
+const crypto = require('crypto');
 const express = require('express');
 const axios = require('axios');
 const path = require("path");
@@ -8,8 +8,25 @@ const config = require("./config");
 
 const app = express();
 
-function getHash(data) {
-    return createHash('sha256').update(data + config.SALT).digest('hex');
+
+function encrypt(data) {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes128', config.SECRET_KEY, iv);
+    let encrypted = cipher.update(data, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+
+    return iv.toString('hex') + encrypted;
+}
+
+function decrypt(data) {
+    const iv = Buffer.from(data.slice(0, 32), 'hex');
+    data = data.slice(32,);
+
+    const decipher = crypto.createDecipheriv('aes128', config.SECRET_KEY, iv);
+    let decrypted = decipher.update(data, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+
+    return decrypted;
 }
 
 function randInt(n) {
@@ -26,18 +43,17 @@ function getVideoURL() {
 app.get('/', async (req, res) => {
 
     // secure the local DB
-    var [count, hash] = readFileSync('./count.txt', 'utf-8').split(':');
-    const tempHash = getHash(count);
+    var data = readFileSync('./count.txt', 'utf-8');
+    var count;
 
-    if (tempHash === hash) {
-        const newCount = parseInt(count) + 1;
-        const newHash = getHash(newCount);
+    try {
+        count = parseInt(decrypt(data));
+        const newCount = count + 1;
+        const encryptedData = encrypt(newCount.toString());
 
-        const data = newCount.toString() + ':' + newHash;
-
-        writeFileSync('./count.txt', data);
-
-    } else {
+        writeFileSync('./count.txt', encryptedData);
+    }
+    catch {
         count = "ERROR!";
     }
 
@@ -63,9 +79,9 @@ app.get('/', async (req, res) => {
 
         if (response.status === 200) {
             let results = response.data['results'];
-            gif_url =  results[randInt(results.length)]['media'][0]['gif'].url;
+            gif_url = results[randInt(results.length)]['media'][0]['gif'].url;
         }
-        else{
+        else {
             gif_url = "https://c.tenor.com/jwAkhSG3BWEAAAAC/error.gif"; // ERROR gif
         }
     }
