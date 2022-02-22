@@ -29,10 +29,8 @@
 	height: 200px;
 	width: 310px;
 	position: relative;
-	top: 100px;
-	/* left: 10px; */
-	align-items: center;
-	/* background-color: wheat; */
+	top: 100px;	
+	align-items: center;	
 }
 
 .card-text {
@@ -67,10 +65,20 @@
 	font-family: Ruda;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 30px;
+	font-size: 20px;
 	line-height: 35px;	
 	justify-content: center;
 
 	color: #000000;
 
+}
+
+iframe {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	border: none;
+	overflow: hidden;
 }
