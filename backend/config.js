@@ -1,7 +1,7 @@
 var config = {};
 
 config.HOST = "localhost"
-config.PORT = process.env.PORT || 5000;
+config.PORT = process.env.PORT || 3001;
 
 config.SECRET_KEY = "H6rT-V?pKE5=*8mp";
 

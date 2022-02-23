@@ -1,25 +1,31 @@
-import "./App.css";
+import React from "react";
 import Card from "./components/Card";
-import logo from "./assets/UI_design/logo/Counter_withBg.png";
+import "./App.css";
 
 function App() {
-  const data = {
-    title: "Welcome to Counter.js",
-    body: "This page has been viewed",
-    image: { l: logo, h: 200, w: 290 },
-    counter: "5",
-  };
+  const [data, setData] = React.useState({});
+  const [isLoading, setLoading] = React.useState(true);
 
-  return (
-    <div className="App">
-      <Card
-        title={data.title}
-        body={data.body}
-        image={data.image}
-        counter={data.counter}
-      />
-    </div>
-  );
+  React.useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading)
+    return <h1>Loading...</h1>
+  else {
+    const frameData = data.i_url ? data.i_url : data.v_url;
+
+    return (
+      <div className="App">
+        <Card counter={data.counter} content={frameData} />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -5,13 +5,24 @@ export default function Card(props) {
     return (
         <div className="card">
             <div className="card-header">
-                <h5 className="card-title">{props.title}</h5>
+                <h5 className="card-title">Welcome to Counter.js</h5>
             </div>
-            <div className="card-text">{props.body}</div>
+            <div className="card-text">This page has been viewed</div>
             <div className="card-counter-box">{props.counter} times</div>
 
             <div className="card-image">
-                <img height={props.image.h} width={props.image.w} src={props.image.l} alt="Logo" />
+                {!props.content ? null :
+                    <iframe
+                        width="300"
+                        height="200"
+                        src={props.content}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="Embedded Media"
+                        scrolling="no"
+                    />
+                }
             </div>
         </div>
     );
